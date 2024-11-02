@@ -1,24 +1,35 @@
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:8.0-debian
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DATABASE: test
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpass
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
     ports:
       - "3306:3306"
     networks:
       - mysql
   redis:
-    image: redis:latest
+    image: redis:7.4.1
     ports:
       - "6379:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command:
+      - "redis-server"
+      - "/usr/local/etc/redis/redis.conf"
+    healthcheck:
+      test: [ "CMD", "redis-cli","ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     networks:
       - redis-net
     depends_on:
       - mysql
   zipkin:
-    image: openzipkin/zipkin
+    image: openzipkin/zipkin:latest
     container_name: zipkin
     ports:
       - "9411:9411"
