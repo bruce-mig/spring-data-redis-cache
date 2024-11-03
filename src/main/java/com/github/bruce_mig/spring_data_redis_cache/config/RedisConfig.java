@@ -12,20 +12,20 @@ import org.springframework.data.redis.connection.lettuce.LettuceClientConfigurat
 @Configuration
 public class RedisConfig {
 
-    @Value("spring.redis.host")
+    @Value("${spring.redis.host}")
     private String host;
 
-    @Value("spring.redis.username")
+    @Value("${spring.redis.username}")
     private String username;
 
-    @Value("spring.redis.password")
+    @Value("${spring.redis.password}")
     private String password;
 
     @Bean
     public LettuceConnectionFactory redisConnectionFactory(){
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("localhost", 6379);
-        config.setUsername("redisuser");
-        config.setPassword("redispass");
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(host, 6379);
+        config.setUsername(username);
+        config.setPassword(password);
 
         // Build custom client configuration with ClientOptions
         LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
