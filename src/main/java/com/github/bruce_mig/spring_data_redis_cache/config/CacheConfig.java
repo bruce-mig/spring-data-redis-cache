@@ -18,7 +18,7 @@ public class CacheConfig {
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheConfiguration cacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .disableCachingNullValues()
+//                .disableCachingNullValues()
                 .entryTtl(CustomTtlFunction.INSTANCE); // Set the custom TTL function globally
 
         return RedisCacheManager.builder(redisConnectionFactory)
