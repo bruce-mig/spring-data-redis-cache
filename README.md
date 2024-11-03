@@ -4,7 +4,7 @@ This project demostrates the use of Redis as a cache for a MySQL  database using
 
 ### Cache Aside Pattern
 
-![cache aside pattern](cache aside pattern.webp)
+![cache aside pattern](cache-aside-pattern.png)
 
 This is the most common way to use Redis as a cache. 
 Cache-aside is an excellent choice for read-heavy applications when cache misses are acceptable. 
